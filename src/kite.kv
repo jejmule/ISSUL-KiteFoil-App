@@ -1,0 +1,101 @@
+#:kivy 1.4
+
+<MyPopup>:
+    auto_dismiss: False
+	size_hint : 0.8,0.3
+	title : "information"
+	Label :
+		text: 'Download in progress'
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: 0
+    spacing: 10
+    BoxLayout :
+    	orientation : 'vertical'
+    	padding: 10
+    	canvas.before:
+            Color:  
+                rgba: 0.2, 0.2, 0.2, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    	Label :
+    		text:"Board"
+    	Label :
+    		text: "Status : "+app.board_connected+", battery : "+str(app.board_battery)+" %"
+    	Label :
+    		text: "Front :"+str(app.F_front or "")+" N"+"   Back :"+str(app.F_back or "")+" N"
+		Label :
+    		text: "Total :"+str((app.F_front or 0) + (app.F_back or 0))+" N"
+    	BoxLayout :
+    		orientation : 'horizontal'
+    		spacing: 10
+    		Button:
+    			text: "Tare"
+				on_press:app.tare_board(1)
+    		Button:
+    			text: "Reset tare"
+				on_press:app.tare_board(0)
+    BoxLayout :
+    	orientation : 'vertical'
+    	padding: 10
+    	canvas.before:
+            Color:  
+                rgba: 0.2, 0.2, 0.2, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    	Label :
+    		text:"Harness"
+    	Label :
+    		text: "Status : connected, 70%"
+    	Label :
+    		text: "Tension : 100 N"
+    	BoxLayout :
+    		orientation : 'horizontal'
+    		spacing: 10
+    		Button:
+    			text: "Tare"
+				on_press:app.tare_harness(1)
+    		Button:
+    			text: "Reset tare"
+				on_press:app.tare_harness(0)
+    BoxLayout :
+    	orientation : 'vertical'
+    	padding: 10
+    	canvas.before:
+            Color:  
+                rgba: 0.2, 0.2, 0.2, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    	Label:
+    		text: "GPS"
+    	Label:
+    		text:"lat :"+str(app.gps_lat)+" lon :"+str(app.gps_lon)
+		Label:
+			text:"accuracy :"+str(app.gps_accuracy)
+	
+	BoxLayout :
+    	orientation : 'vertical'
+    	padding: 10
+		spacing : 10
+		size_hint : 1, 0.6
+    	canvas.before:
+            Color:  
+                rgba: 0.2, 0.2, 0.2, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+		TextInput :
+			id : rider_label
+			text: "Rider"
+			halign:"center"
+
+		ToggleButton :
+			id: record_btn
+			text: "Record"
+			state : "normal"
+			on_press: app.record(self.state)
