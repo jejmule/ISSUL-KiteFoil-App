@@ -49,9 +49,9 @@ BoxLayout:
     	Label :
     		text:"Harness"
     	Label :
-    		text: "Status : connected, 70%"
+    		text: "Status : not connected, xx%"
     	Label :
-    		text: "Tension : 100 N"
+    		text: "Tension : xxx N"
     	BoxLayout :
     		orientation : 'horizontal'
     		spacing: 10
@@ -76,26 +76,3 @@ BoxLayout:
     		text:"lat :"+str(app.gps_lat)+" lon :"+str(app.gps_lon)
 		Label:
 			text:"accuracy :"+str(app.gps_accuracy)
-	
-	BoxLayout :
-    	orientation : 'vertical'
-    	padding: 10
-		spacing : 10
-		size_hint : 1, 0.6
-    	canvas.before:
-            Color:  
-                rgba: 0.2, 0.2, 0.2, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-
-		TextInput :
-			id : rider_label
-			text: "Rider"
-			halign:"center"
-
-		ToggleButton :
-			id: record_btn
-			text: "Record"
-			state : "normal"
-			on_press: app.record(self.state)
